@@ -113,7 +113,13 @@ def upload_file():
          publisher.publish_message(msg)
          logger.info("[{}] published".format(msg['_id']))
          
-         time.sleep(config['redis']['get_timeout'])
+         
+         begin_wait_time = time.time()
+         while (time.time() - begin_wait_time) < config['redis']['get_timeout']:
+            if r.exists(msg['_id']):
+               break
+            
+            time.sleep(0.2)
          
          res = {
             "msg":"Timeout processing request"
