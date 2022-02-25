@@ -18,7 +18,7 @@ dev:
   redis:
     host: 127.0.0.1
     port: 6379
-    get_timeout: 2.0
+    get_timeout: 5.0
 prod:
   broker:
     uri: 'amqp://guest:guest@broker:5672/%2F?connection_attempts=3&heartbeat=3600'
@@ -41,4 +41,4 @@ prod:
   redis:
     host: redis
     port: 6379
-    get_timeout: 2.0
+    get_timeout: 10.0
