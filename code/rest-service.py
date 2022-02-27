@@ -30,9 +30,10 @@ import redis
 
 from pymongo import MongoClient
 
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from werkzeug.utils import secure_filename
-app = Flask(__name__)
+
+app = Flask(__name__, static_url_path='')
 
 
 #create logger
@@ -63,9 +64,17 @@ broker = None
 
 #app config
 config = None
-	
+
+@app.route('/', methods = ['GET'])
+def upload():
+   return send_from_directory('static','upload.html')
+
+@app.route('/asset/<path:path>', methods = ['GET'])
+def asset(path):
+   return send_from_directory('static', path)
+
 @app.route('/process', methods = ['GET', 'POST'])
-def upload_file():
+def process():
    if request.method == 'POST':
       
       
