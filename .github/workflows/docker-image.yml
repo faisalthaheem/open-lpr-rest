@@ -19,7 +19,7 @@ jobs:
     - name: Check out the repo
       uses: actions/checkout@v2
       
-    - name: Log in to ghcr.io
+    - name: Log in to docker.io
       uses: redhat-actions/podman-login@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
