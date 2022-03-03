@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 env:
-    IMAGE_NAME: open-lpr-rest
+    IMAGE_NAME: faisalthaheem/open-lpr-rest
     IMAGE_REGISTRY: docker.io
     
 jobs:
@@ -30,7 +30,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: faisalthaheem/open-lpr-rest
+        images: ${{ env.IMAGE_NAME }}
 
     - name: Install qemu dependency
       run: |
@@ -41,7 +41,7 @@ jobs:
       id: build_image
       uses: redhat-actions/buildah-build@v2
       with:
-        image: faisalthaheem/open-lpr-rest
+        image: ${{ env.IMAGE_NAME }}
         tags: ${{ steps.meta.outputs.tags }}
         platforms: linux/amd64, linux/arm64
         containerfiles: |
